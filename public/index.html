@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <h1>🏋️ FitTrack Pro</h1>
+      <button data-view="auth" class="nav-btn">Auth</button>
+      <button data-view="onboarding" class="nav-btn">Onboarding</button>
+      <button data-view="dashboard" class="nav-btn">Dashboard</button>
+      <button data-view="meal" class="nav-btn">Meal Planner</button>
+      <button data-view="workout" class="nav-btn">Workout</button>
+      <button data-view="admin" class="nav-btn">Admin</button>
+      <button id="logout" class="nav-btn danger">Logout</button>
+    </aside>
+
+    <main class="content">
+      <section id="auth" class="view active">
+        <div class="card">
+          <h2>Sign Up / Login</h2>
+          <div class="auth-grid">
+            <form id="signupForm">
+              <h3>Create account</h3>
+              <input type="email" name="email" placeholder="Email" required />
+              <input type="password" name="password" placeholder="Password" required />
+              <p class="hint">8+ chars, upper, lower, number, special char</p>
+              <button type="submit">Sign Up</button>
+            </form>
+            <form id="loginForm">
+              <h3>Welcome back</h3>
+              <input type="email" name="email" placeholder="Email" required />
+              <input type="password" name="password" placeholder="Password" required />
+              <button type="submit">Login</button>
+              <p class="hint">Admin demo: admin@fittrack.dev / Admin@12345</p>
+            </form>
+          </div>
+          <p id="authMsg"></p>
+        </div>
+      </section>
+
+      <section id="onboarding" class="view">
+        <div class="card">
+          <h2>User Onboarding</h2>
+          <form id="profileForm" class="grid-form">
+            <input name="name" placeholder="Name" required />
+            <input name="age" type="number" placeholder="Age" required />
+            <select name="gender"><option>Male</option><option>Female</option><option>Other</option></select>
+            <input name="height_cm" type="number" placeholder="Height (cm)" required />
+            <input name="weight_kg" type="number" placeholder="Weight (kg)" required />
+            <select name="goal"><option>Lose Weight</option><option>Gain Muscle</option><option>Maintain Fitness</option></select>
+            <select name="activity_level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+            <select name="dietary_preference"><option>Vegetarian</option><option>Vegan</option></select>
+            <button type="submit">Save Profile</button>
+          </form>
+          <p id="profileMsg"></p>
+        </div>
+      </section>
+
+      <section id="dashboard" class="view">
+        <div class="card"><h2>Dashboard</h2><div id="summaryCards" class="cards"></div></div>
+        <div class="card">
+          <h3>Weekly Calories & Protein</h3>
+          <canvas id="weeklyChart"></canvas>
+        </div>
+        <div class="card">
+          <h3>Weight Progress</h3>
+          <canvas id="weightChart"></canvas>
+          <form id="weightForm" class="inline-form">
+            <input type="date" name="log_date" required />
+            <input type="number" step="0.1" name="weight_kg" placeholder="Weight kg" required />
+            <button type="submit">Add Weight</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Water Tracker</h3>
+          <form id="waterForm" class="inline-form">
+            <input type="date" name="log_date" required />
+            <input type="number" name="glasses" placeholder="Glasses" min="0" max="30" required />
+            <button type="submit">Log Water</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="meal" class="view">
+        <div class="card">
+          <h2>7-Day Meal Plan</h2>
+          <div id="mealPlan"></div>
+        </div>
+        <div class="card">
+          <h3>Upload Meal Image (AI Estimate)</h3>
+          <form id="mealImageForm" class="inline-form">
+            <input type="file" name="mealImage" accept="image/*" required />
+            <button type="submit">Analyze Meal</button>
+          </form>
+          <p id="mealFeedback"></p>
+        </div>
+        <div class="card">
+          <h3>Progress Photos</h3>
+          <form id="progressPhotoForm" class="inline-form">
+            <input type="file" name="photo" accept="image/*" required />
+            <button type="submit">Upload Photo</button>
+          </form>
+          <p id="photoMsg"></p>
+        </div>
+      </section>
+
+      <section id="workout" class="view">
+        <div class="card"><h2>Workout Plan</h2><div id="workoutPlan"></div></div>
+        <div class="card"><h3>Daily Reminders</h3><ul id="reminders"></ul></div>
+      </section>
+
+      <section id="admin" class="view">
+        <div class="card"><h2>Admin Panel</h2><div id="adminUsers"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
